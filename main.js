@@ -1,40 +1,24 @@
-const button = document.querySelector("#calcButton");
-const risk = document.getElementById("risk");
-const entry = document.getElementById("entry");
-const slPrice = document.getElementById("sl-price");
-const makerFee = document.getElementById("maker");
-const takerFee = document.getElementById("taker");
-const cryptoCoin = document.getElementById("crypto-coin");
+const { create } = require("domain");
+const { app, BrowserWindow } = require("electron");
 
-let posCrypto = document.getElementById("pos-size-crypto");
-let posDollar = document.getElementById("pos-size-dollar");
-let fees = document.getElementById("fees");
-let feesTotal = document.getElementById("fees-total");
-let chosenCrypto = document.getElementById("chosen-crypto");
+const createWindow = () => {
+  const win = new BrowserWindow({
+    width: 800,
+    height: 500,
+  });
+  win.loadFile("index.html");
+};
 
-cryptoCoin.addEventListener("change", function (e) {
-  const getValue = e.target.value;
-  if (getValue === "BTC") {
-    chosenCrypto.textContent = "\u20BF";
-  } else if (getValue === "SOL") {
-    chosenCrypto.textContent = "SOL";
-  } else {
-    chosenCrypto.textContent = "?";
-  }
-  console.log("target =", getValue);
+app.whenReady().then(() => {
+  createWindow();
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
-button.addEventListener("click", () => {
-  const calcPosCrypto = risk.value / Math.abs((entry.value - slPrice.value));
-  posCrypto.value = Math.abs(parseFloat(calcPosCrypto.toFixed(4)));
-
-  const calcPosDollar = entry.value * calcPosCrypto;
-  posDollar.value = Math.abs(parseFloat(calcPosDollar.toFixed(2)));
-
-  const calcFees =
-    (calcPosDollar * makerFee.value + calcPosDollar * takerFee.value) / 100;
-  fees.value = Math.abs(parseFloat(calcFees.toFixed(4)));
-  
-  const calcFeesTotal = parseFloat(risk.value) + parseFloat(calcFees);
-  feesTotal.value = parseFloat(calcFeesTotal.toFixed(4));
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });
