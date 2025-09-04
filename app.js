@@ -25,16 +25,16 @@ cryptoCoin.addEventListener("change", function (e) {
 });
 
 button.addEventListener("click", () => {
-  const calcPosCrypto = risk.value / Math.abs((entry.value - slPrice.value));
-  posCrypto.value = Math.abs(parseFloat(calcPosCrypto.toFixed(4)));
+  const calcPosCrypto = risk.value / (entry.value - slPrice.value);
+  posCrypto.value = parseFloat(calcPosCrypto.toFixed(4));
 
   const calcPosDollar = entry.value * calcPosCrypto;
-  posDollar.value = Math.abs(parseFloat(calcPosDollar.toFixed(2)));
+  posDollar.value = parseFloat(calcPosDollar.toFixed(2));
 
   const calcFees =
     (calcPosDollar * makerFee.value + calcPosDollar * takerFee.value) / 100;
-  fees.value = Math.abs(parseFloat(calcFees.toFixed(4)));
-  
+  fees.value = parseFloat(calcFees.toFixed(4));
+
   const calcFeesTotal = parseFloat(risk.value) + parseFloat(calcFees);
   feesTotal.value = parseFloat(calcFeesTotal.toFixed(4));
 });

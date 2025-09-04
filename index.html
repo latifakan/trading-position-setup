@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Setup-Calculator</title>
   </head>
   <body>
     <div class="container-md">
@@ -50,7 +50,6 @@
             type="number"
             class="form-control"
             id="maker"
-            value="0.02"
             placeholder="Maker Gebühren:"
             aria-label="Amount (to the nearest dollar)"
           />
@@ -63,7 +62,6 @@
             class="form-control"
             id="taker"
             placeholder="Taker Gebühren:"
-            value="0.06"
             aria-label="Amount (to the nearest dollar)"
           />
           <span class="input-group-text">$</span>
@@ -100,13 +98,13 @@
       <div class="d-flex gap-3">
         <div class="input-group mb-3">
           <input
-            name="pos-size-crypto"
             type="number"
             class="form-control"
             id="pos-size-crypto"
             placeholder="Positionsgröße"
             aria-label="Amount (to the nearest dollar)"
           />
+
           <span class="input-group-text" id="chosen-crypto">?</span>
         </div>
         <div class="input-group mb-3">
@@ -144,7 +142,6 @@
         </div>
       </div>
     </div>
-    <script src="main.js"></script>
     <script src="app.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
